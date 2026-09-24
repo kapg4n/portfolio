@@ -62,12 +62,29 @@ ul { list-style: none; }
   font-weight: 700; text-decoration: none; letter-spacing: -0.01em;
   font-size: var(--step-1);
 }
-.site-nav { display: flex; gap: clamp(16px, 2.4vw, 40px); }
+.site-nav { display: flex; gap: clamp(16px, 2.4vw, 40px); margin-left: auto; align-items: center; }
 .site-nav a {
   text-decoration: none; text-transform: uppercase;
   font-size: var(--step--1); letter-spacing: 0.06em;
 }
 .site-nav a:hover { opacity: 0.55; }
+/* header CTA pill — border/text follow the header colour in both states */
+.site-header__cta {
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  padding: 7px 16px; line-height: 1;
+  text-decoration: none; text-transform: uppercase; white-space: nowrap;
+  font-size: var(--step--1); letter-spacing: 0.06em;
+  transition: background 0.2s, color 0.2s, opacity 0.2s;
+}
+/* transparent header (over the orange cover): fill ink, text flame */
+.site-header__cta:hover,
+.site-header__cta:focus-visible { background: var(--ink); color: var(--flame); }
+/* solid header: fill flame, text night */
+.site-header.is-solid .site-header__cta:hover,
+.site-header.is-solid .site-header__cta:focus-visible { background: var(--flame); color: var(--night); }
+.site-header__cta--in-nav { display: none; }
+.site-nav a.site-header__cta:hover { opacity: 1; }
 .menu-toggle {
   display: none;
   font: inherit; text-transform: uppercase; letter-spacing: 0.06em;
@@ -347,7 +364,16 @@ body.is-locked { overflow: hidden; }
   }
   body.nav-open .site-nav { transform: none; }
   body.nav-open .menu-toggle { position: fixed; top: 16px; right: var(--pad); z-index: 31; }
+  /* keep the open overlay (nav links, Close, in-nav CTA) legible on the night background */
+  body.nav-open .site-header { color: var(--flame); }
   .site-nav a { font-size: var(--step-3); text-transform: none; letter-spacing: -0.02em; }
+  /* group the Menu button + CTA to the right of the logo */
+  .menu-toggle { margin-left: auto; }
+  .site-header__cta { padding: 5px 12px; }
+  .site-header__cta--in-nav {
+    display: inline-flex; align-self: flex-start;
+    font-size: var(--step--1); text-transform: uppercase; letter-spacing: 0.06em;
+  }
 
   .works__grid { grid-template-columns: 1fr; gap: clamp(28px, 8vw, 48px); }
   .service { grid-template-columns: 1fr; gap: 6px; }

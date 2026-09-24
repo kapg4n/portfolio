@@ -63,6 +63,10 @@
     return '<a href="' + esc(s.url) + '" target="_blank" rel="noopener">' + esc(s.label) + '</a>';
   }).join("");
 
+  /* ---------- header CTA (mailto with prefilled subject) ---------- */
+  var ctaHref = "mailto:" + S.email + "?subject=" + encodeURIComponent("New project enquiry");
+  document.querySelectorAll(".site-header__cta").forEach(function (a) { a.href = ctaHref; });
+
   /* ---------- mobile menu ---------- */
   var toggle = $("#menu-toggle");
   var nav = $("#site-nav");
