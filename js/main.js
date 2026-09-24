@@ -62,7 +62,7 @@
     var cs = getComputedStyle(box);
     var avail = box.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
     mark.style.fontSize = "100px";
-    var w = mark.scrollWidth;
+    var w = mark.getBoundingClientRect().width;
     if (w > 0) mark.style.fontSize = Math.floor((100 * avail / w) * 0.995 * 100) / 100 + "px";
   }
   fitWordmark();
