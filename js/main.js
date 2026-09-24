@@ -167,23 +167,29 @@
     if (!word) return;
     if (reduce) return;
     var final = word.getAttribute("data-final") || word.textContent;
-    var glyphs = "ABCDEFGHIJKLMNOPQRSTUVWXYZ#%*+=/<>";
-    var HOLD = 3600; // pause on the resolved word before scrambling again
+    var glyphs = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    var HOLD = 4200; // pause on the resolved word before scrambling again
+    var STEP = 70;   // ms between scramble frames (higher = slower)
 
     // one scramble-and-settle pass; calls done() when the word has resolved
     function scramble(done) {
       var lockAt = [];
-      for (var i = 0; i < final.length; i++) lockAt[i] = 6 + i * 3;
+      for (var i = 0; i < final.length; i++) lockAt[i] = 3 + i * 2;
       var last = lockAt[final.length - 1];
-      var frame = 0;
-      (function tick() {
-        var out = "";
-        for (var j = 0; j < final.length; j++) {
-          if (final[j] === " ") { out += " "; continue; }
-          out += frame >= lockAt[j] ? final[j] : glyphs[(Math.random() * glyphs.length) | 0];
+      var frame = 0, prev = 0;
+      (function tick(t) {
+        if (!prev) prev = t;
+        if (t - prev >= STEP) {
+          prev = t;
+          var out = "";
+          for (var j = 0; j < final.length; j++) {
+            if (final[j] === " ") { out += " "; continue; }
+            out += frame >= lockAt[j] ? final[j] : glyphs[(Math.random() * glyphs.length) | 0];
+          }
+          word.textContent = out;
+          frame++;
         }
-        word.textContent = out;
-        if (frame++ < last) requestAnimationFrame(tick);
+        if (frame <= last) requestAnimationFrame(tick);
         else { word.textContent = final; if (done) setTimeout(done, HOLD); }
       })();
     }

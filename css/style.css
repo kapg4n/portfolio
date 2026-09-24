@@ -11,7 +11,7 @@
   --flame: #F35B04;
   --font: "Arimo", "Helvetica Neue", Helvetica, Arial, sans-serif;
   --font-display: "Familjen Grotesk", "Arimo", "Helvetica Neue", Arial, sans-serif;
-  --font-hero: "Fraunces", "Familjen Grotesk", Georgia, "Times New Roman", serif;
+  --font-hero: "Anton", "Familjen Grotesk", "Arial Narrow", "Helvetica Neue", sans-serif;
   --pad: clamp(16px, 3.2vw, 44px);
   --step--1: 0.875rem;
   --step-0: 1rem;
@@ -159,34 +159,28 @@ ul { list-style: none; }
 }
 .intro__mark {
   font-family: var(--font-hero);
-  font-weight: 600;
-  line-height: 0.92;
-  letter-spacing: -0.005em;
+  font-weight: 400; /* Anton ships a single heavy weight */
+  line-height: 0.9;
+  letter-spacing: 0.005em;
   text-transform: uppercase;
-  font-size: clamp(2.75rem, 11vw, 9rem);
-  margin-left: -0.02em;
+  font-size: clamp(2.75rem, 12vw, 9.5rem);
+  margin-left: -0.01em;
 }
 .intro__word { min-width: 0; } /* JS locks a width so the loop doesn't shift the layout */
+/* keep the asterisk in the plain grotesque, not the display face */
+.intro__star { font-family: var(--font-display); }
 .intro__star { vertical-align: 0.1em; }
 .intro__def {
   margin-top: clamp(20px, 3.5vh, 40px);
   max-width: 44ch;
 }
 .intro__ipa { font-size: var(--step-1); }
-.intro__gloss {
-  margin-top: 4px;
-  font-family: var(--font-hero);
-  font-style: italic;
-  font-size: var(--step-2);
-  line-height: 1.15;
-  letter-spacing: -0.01em;
-  color: rgba(17, 17, 17, 0.7);
-}
+.intro__gloss { font-size: var(--step-1); color: rgba(17, 17, 17, 0.62); }
 .intro__tag {
   font-family: var(--font-hero);
   font-size: var(--step-2);
-  font-weight: 600;
-  letter-spacing: -0.01em;
+  font-weight: 400;
+  letter-spacing: 0.01em;
 }
 
 /* ---------- section heads ---------- */
