@@ -169,7 +169,7 @@
     var final = word.getAttribute("data-final") || word.textContent;
     var glyphs = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     var HOLD = 4200; // pause on the resolved word before scrambling again
-    var STEP = 70;   // ms between scramble frames (higher = slower)
+    var STEP = 45;   // ms between scramble frames (higher = slower)
 
     // one scramble-and-settle pass; calls done() when the word has resolved
     function scramble(done) {
