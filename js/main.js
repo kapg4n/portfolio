@@ -161,27 +161,38 @@
     nav.addEventListener("click", function (e) { if (e.target.closest("a")) closeMenu(); });
   }
 
-  /* ---------- "recalibrating" letter scramble on the wordmark ---------- */
+  /* ---------- continuous "recalibrating" letter scramble on the wordmark ---------- */
   (function () {
     var word = $("#intro-word");
     if (!word) return;
     if (reduce) return;
     var final = word.getAttribute("data-final") || word.textContent;
     var glyphs = "ABCDEFGHIJKLMNOPQRSTUVWXYZ#%*+=/<>";
-    var lockAt = [];
-    for (var i = 0; i < final.length; i++) lockAt[i] = 10 + i * 3;
-    var last = lockAt[final.length - 1];
-    var frame = 0;
-    function tick() {
-      var out = "";
-      for (var j = 0; j < final.length; j++) {
-        if (final[j] === " ") { out += " "; continue; }
-        out += frame >= lockAt[j] ? final[j] : glyphs[(Math.random() * glyphs.length) | 0];
-      }
-      word.textContent = out;
-      if (frame++ < last) requestAnimationFrame(tick); else word.textContent = final;
+    var HOLD = 3600; // pause on the resolved word before scrambling again
+
+    // one scramble-and-settle pass; calls done() when the word has resolved
+    function scramble(done) {
+      var lockAt = [];
+      for (var i = 0; i < final.length; i++) lockAt[i] = 6 + i * 3;
+      var last = lockAt[final.length - 1];
+      var frame = 0;
+      (function tick() {
+        var out = "";
+        for (var j = 0; j < final.length; j++) {
+          if (final[j] === " ") { out += " "; continue; }
+          out += frame >= lockAt[j] ? final[j] : glyphs[(Math.random() * glyphs.length) | 0];
+        }
+        word.textContent = out;
+        if (frame++ < last) requestAnimationFrame(tick);
+        else { word.textContent = final; if (done) setTimeout(done, HOLD); }
+      })();
     }
-    setTimeout(function () { requestAnimationFrame(tick); }, 260);
+
+    function loop() { scramble(loop); }
+
+    // lock the resolved width first so looping never shifts the layout
+    function start() { word.style.minWidth = word.offsetWidth + "px"; setTimeout(loop, 260); }
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(start); else start();
   })();
 
   /* ---------- header goes solid once the page slides over the cover ---------- */

@@ -11,6 +11,7 @@
   --flame: #F35B04;
   --font: "Arimo", "Helvetica Neue", Helvetica, Arial, sans-serif;
   --font-display: "Familjen Grotesk", "Arimo", "Helvetica Neue", Arial, sans-serif;
+  --font-hero: "Fraunces", "Familjen Grotesk", Georgia, "Times New Roman", serif;
   --pad: clamp(16px, 3.2vw, 44px);
   --step--1: 0.875rem;
   --step-0: 1rem;
@@ -157,23 +158,34 @@ ul { list-style: none; }
   background: var(--paper);
 }
 .intro__mark {
-  font-weight: 700;
-  line-height: 0.88;
-  letter-spacing: -0.02em;
+  font-family: var(--font-hero);
+  font-weight: 600;
+  line-height: 0.92;
+  letter-spacing: -0.005em;
   text-transform: uppercase;
   font-size: clamp(2.75rem, 11vw, 9rem);
   margin-left: -0.02em;
 }
+.intro__word { min-width: 0; } /* JS locks a width so the loop doesn't shift the layout */
 .intro__star { vertical-align: 0.1em; }
 .intro__def {
   margin-top: clamp(20px, 3.5vh, 40px);
   max-width: 44ch;
 }
 .intro__ipa { font-size: var(--step-1); }
-.intro__gloss { font-size: var(--step-1); color: rgba(17, 17, 17, 0.62); }
-.intro__tag {
+.intro__gloss {
+  margin-top: 4px;
+  font-family: var(--font-hero);
+  font-style: italic;
   font-size: var(--step-2);
-  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  color: rgba(17, 17, 17, 0.7);
+}
+.intro__tag {
+  font-family: var(--font-hero);
+  font-size: var(--step-2);
+  font-weight: 600;
   letter-spacing: -0.01em;
 }
 
@@ -181,7 +193,7 @@ ul { list-style: none; }
 h2 { font-weight: 700; letter-spacing: -0.02em; }
 
 /* ---------- display font (swap via --font-display + the fonts <link>) ---------- */
-.intro__mark, .intro__tag, h2, .service__title, .work__title,
+h2, .service__title, .work__title,
 .project__title, .project__next a, .site-header__logo,
 .site-footer__mail, .featured__title { font-family: var(--font-display); }
 
