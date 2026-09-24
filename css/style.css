@@ -10,6 +10,7 @@
   --night: #111111;
   --flame: #F35B04;
   --font: "Arimo", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-display: "Familjen Grotesk", "Arimo", "Helvetica Neue", Arial, sans-serif;
   --pad: clamp(16px, 3.2vw, 44px);
   --step--1: 0.875rem;
   --step-0: 1rem;
@@ -157,8 +158,8 @@ ul { list-style: none; }
 }
 .intro__mark {
   font-weight: 700;
-  line-height: 0.84;
-  letter-spacing: -0.04em;
+  line-height: 0.88;
+  letter-spacing: -0.02em;
   text-transform: uppercase;
   font-size: clamp(2.75rem, 11vw, 9rem);
   margin-left: -0.02em;
@@ -178,6 +179,11 @@ ul { list-style: none; }
 
 /* ---------- section heads ---------- */
 h2 { font-weight: 700; letter-spacing: -0.02em; }
+
+/* ---------- display font (swap via --font-display + the fonts <link>) ---------- */
+.intro__mark, .intro__tag, h2, .service__title, .work__title,
+.project__title, .project__next a, .site-header__logo,
+.site-footer__mail, .featured__title { font-family: var(--font-display); }
 
 /* ---------- featured ---------- */
 .featured { padding: clamp(24px, 5vh, 64px) var(--pad) clamp(48px, 9vh, 96px); }
@@ -202,7 +208,7 @@ h2 { font-weight: 700; letter-spacing: -0.02em; }
 .featured__title {
   margin-top: 6px;
   font-size: var(--step-3); font-weight: 700;
-  letter-spacing: -0.025em; line-height: 1;
+  letter-spacing: -0.02em; line-height: 1.02;
 }
 .featured__facts { margin-top: 8px; color: var(--muted); font-size: var(--step-1); }
 .featured__link {
@@ -282,7 +288,7 @@ h2 { font-weight: 700; letter-spacing: -0.02em; }
 }
 .service__title {
   font-size: var(--step-3); font-weight: 700;
-  letter-spacing: -0.03em; line-height: 1; text-transform: uppercase;
+  letter-spacing: -0.015em; line-height: 1.05; text-transform: uppercase;
 }
 .service__text { color: var(--muted); max-width: 42ch; }
 .service__items {
@@ -323,8 +329,8 @@ h2 { font-weight: 700; letter-spacing: -0.02em; }
   margin-top: 14px;
   font-size: clamp(2rem, 8vw, 8rem);
   font-weight: 700;
-  letter-spacing: -0.035em;
-  line-height: 1;
+  letter-spacing: -0.02em;
+  line-height: 1.02;
   text-decoration: none;
   overflow-wrap: anywhere;
   background-image: linear-gradient(currentColor, currentColor);
@@ -368,7 +374,7 @@ h2 { font-weight: 700; letter-spacing: -0.02em; }
 .project__head { margin-top: clamp(24px, 6vh, 72px); }
 .project__title {
   font-size: clamp(3rem, 11vw, 11rem);
-  font-weight: 700; letter-spacing: -0.035em; line-height: 0.86;
+  font-weight: 700; letter-spacing: -0.02em; line-height: 0.9;
   margin-left: -0.03em;
 }
 .project__facts {
@@ -388,7 +394,7 @@ h2 { font-weight: 700; letter-spacing: -0.02em; }
 .project__next { margin-top: 48px; border-top: 1px solid var(--line); padding-top: 14px; }
 .project__next a {
   display: block; text-decoration: none;
-  font-size: var(--step-3); font-weight: 700; letter-spacing: -0.03em; line-height: 1.05;
+  font-size: var(--step-3); font-weight: 700; letter-spacing: -0.02em; line-height: 1.05;
 }
 .project__next span { display: block; color: var(--muted); font-size: var(--step-0); font-weight: 400; letter-spacing: 0; }
 .project__next a:hover { opacity: 0.6; }
