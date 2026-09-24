@@ -19,11 +19,20 @@
     return '<div class="art" style="background:' + esc(p.color) + ';color:' + esc(p.ink) + '" aria-hidden="true">' + esc(p.title) + '</div>';
   }
 
-  // 4:5 thumbnail for the works grid — prefers a portrait plate, falls back to the panel
-  function thumb(p) {
-    var src = (p.images && (p.images[1] || p.images[0]));
-    if (src) return '<img src="' + esc(src) + '" alt="' + esc(p.title) + '" loading="lazy">';
-    return '<div class="art" style="background:' + esc(p.color) + ';color:' + esc(p.ink) + '" aria-hidden="true">' + esc(p.title) + '</div>';
+  // Layered thumbnail for a grid card. Wide cards use images[0] (16:9) with
+  // images[1] as the hover image; regular cards use images[1] with images[2].
+  function workMedia(p, wide) {
+    var imgs = p.images || [];
+    var primary = wide ? imgs[0] : imgs[1];
+    var secondary = wide ? imgs[1] : imgs[2];
+    if (!primary) {
+      return '<div class="art" style="background:' + esc(p.color) + ';color:' + esc(p.ink) + '" aria-hidden="true">' + esc(p.title) + '</div>';
+    }
+    var html = '<img class="work__img work__img--a" src="' + esc(primary) + '" alt="' + esc(p.title) + '" loading="lazy">';
+    if (secondary && secondary !== primary) {
+      html += '<img class="work__img work__img--b" src="' + esc(secondary) + '" alt="" aria-hidden="true" loading="lazy">';
+    }
+    return html;
   }
 
   /* ---------- fill simple text ---------- */
@@ -94,12 +103,16 @@
   })();
 
   /* ---------- works grid ---------- */
+  var vi = -1; // visible index (featured is skipped) drives the wide/pair rhythm
   $("#works-list").innerHTML = S.projects.map(function (p, i) {
     if (p.slug === featuredSlug) return "";
-    return '<li class="work"><button class="work__card" type="button" data-i="' + i + '">' +
-      '<span class="work__media">' + thumb(p) + '</span>' +
+    vi++;
+    var wide = (vi % 3 === 0);
+    var meta = [p.type, p.year, p.location].filter(Boolean).join(" · ");
+    return '<li class="work' + (wide ? " work--wide" : "") + '"><button class="work__card" type="button" data-i="' + i + '">' +
+      '<span class="work__media">' + workMedia(p, wide) + '</span>' +
       '<span class="work__title">' + esc(p.title) + '</span>' +
-      '<span class="work__desc">' + esc(p.type) + '</span>' +
+      '<span class="work__desc">' + esc(meta) + '</span>' +
       '</button></li>';
   }).join("");
 
