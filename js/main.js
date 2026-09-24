@@ -9,12 +9,19 @@
     });
   }
 
-  // Colour panel or image for a project
+  // Colour panel or image for a project, at image index i
   function art(p, i) {
     var src = p.images && p.images[i || 0];
     if (src) {
       return '<div class="art art--img"><img src="' + esc(src) + '" alt="' + esc(p.title) + ', image ' + ((i || 0) + 1) + '" loading="lazy"></div>';
     }
+    return '<div class="art" style="background:' + esc(p.color) + ';color:' + esc(p.ink) + '" aria-hidden="true">' + esc(p.title) + '</div>';
+  }
+
+  // 4:5 thumbnail for the works grid — prefers a portrait plate, falls back to the panel
+  function thumb(p) {
+    var src = (p.images && (p.images[1] || p.images[0]));
+    if (src) return '<img src="' + esc(src) + '" alt="' + esc(p.title) + '" loading="lazy">';
     return '<div class="art" style="background:' + esc(p.color) + ';color:' + esc(p.ink) + '" aria-hidden="true">' + esc(p.title) + '</div>';
   }
 
@@ -25,19 +32,20 @@
   });
   $("#year").textContent = new Date().getFullYear();
 
-  /* ---------- works list ---------- */
-  $("#works-count").textContent = S.projects.length + " projects";
+  /* ---------- works grid ---------- */
   $("#works-list").innerHTML = S.projects.map(function (p, i) {
-    return '<li class="work"><button class="work__btn" type="button" data-i="' + i + '">' +
+    return '<li class="work"><button class="work__card" type="button" data-i="' + i + '">' +
+      '<span class="work__media">' + thumb(p) + '</span>' +
       '<span class="work__title">' + esc(p.title) + '</span>' +
-      '<span class="work__type">' + esc(p.type) + '</span>' +
-      '<span class="work__year">' + esc(p.year) + '</span>' +
+      '<span class="work__desc">' + esc(p.type) + '</span>' +
       '</button></li>';
   }).join("");
 
   /* ---------- services ---------- */
   $("#services-list").innerHTML = S.services.map(function (s) {
-    return '<div class="service"><dt>' + esc(s.title) + '</dt><dd>' + esc(s.text) + '</dd></div>';
+    return '<div class="service"><dt class="service__title">' + esc(s.title) + '</dt>' +
+      (s.text ? '<dd class="service__text">' + esc(s.text) + '</dd>' : '<dd></dd>') +
+      '</div>';
   }).join("");
 
   /* ---------- about ---------- */
@@ -55,51 +63,32 @@
     return '<a href="' + esc(s.url) + '" target="_blank" rel="noopener">' + esc(s.label) + '</a>';
   }).join("");
 
-  /* ---------- wordmark fits the full width ---------- */
-  var mark = $("#wordmark");
-  function fitWordmark() {
-    var box = mark.parentElement;
-    var cs = getComputedStyle(box);
-    var avail = box.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
-    mark.style.fontSize = "100px";
-    var w = mark.getBoundingClientRect().width;
-    if (w > 0) mark.style.fontSize = Math.floor((100 * avail / w) * 0.995 * 100) / 100 + "px";
+  /* ---------- mobile menu ---------- */
+  var toggle = $("#menu-toggle");
+  var nav = $("#site-nav");
+  function closeMenu() {
+    document.body.classList.remove("nav-open");
+    toggle.setAttribute("aria-expanded", "false");
+    toggle.textContent = "Menu";
   }
-  fitWordmark();
-  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitWordmark);
-  window.addEventListener("resize", fitWordmark);
+  if (toggle) {
+    toggle.addEventListener("click", function () {
+      var open = document.body.classList.toggle("nav-open");
+      toggle.setAttribute("aria-expanded", String(open));
+      toggle.textContent = open ? "Close" : "Menu";
+    });
+    nav.addEventListener("click", function (e) { if (e.target.closest("a")) closeMenu(); });
+  }
 
-  /* ---------- hover preview following the cursor ---------- */
-  var peek = $("#peek");
-  var list = $("#works-list");
-  var fine = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
-  var current = -1, x = 0, y = 0, px = 0, py = 0, raf = null;
-  function loop() {
-    px += (x - px) * 0.18;
-    py += (y - py) * 0.18;
-    peek.style.transform = "translate(" + (px + 24) + "px," + (py - peek.offsetHeight / 2) + "px)";
-    raf = requestAnimationFrame(loop);
-  }
-  if (fine) {
-    list.addEventListener("mousemove", function (e) {
-      x = e.clientX; y = e.clientY;
-      var btn = e.target.closest(".work__btn");
-      if (!btn) return;
-      var i = +btn.dataset.i;
-      if (i !== current) {
-        current = i;
-        peek.innerHTML = art(S.projects[i], 0);
-      }
-      if (!peek.classList.contains("is-on")) {
-        px = x; py = y;
-        peek.classList.add("is-on");
-        if (!raf) raf = requestAnimationFrame(loop);
-      }
-    });
-    list.addEventListener("mouseleave", function () {
-      peek.classList.remove("is-on");
-      cancelAnimationFrame(raf); raf = null; current = -1;
-    });
+  /* ---------- header goes solid once past the orange cover ---------- */
+  var header = $("#site-header");
+  var intro = $("#top");
+  if (header && intro && "IntersectionObserver" in window) {
+    new IntersectionObserver(function (entries) {
+      header.classList.toggle("is-solid", !entries[0].isIntersecting);
+    }, { rootMargin: "-70px 0px 0px 0px" }).observe(intro);
+  } else if (header) {
+    header.classList.add("is-solid");
   }
 
   /* ---------- project overlay, routed by #work/slug ---------- */
@@ -126,7 +115,6 @@
     document.body.classList.add("is-locked");
     document.title = p.title + ", " + S.name;
     $("#project-close").focus();
-    peek.classList.remove("is-on");
   }
 
   function closeProject() {
@@ -147,8 +135,8 @@
     closeProject();
   }
 
-  list.addEventListener("click", function (e) {
-    var btn = e.target.closest(".work__btn");
+  $("#works-list").addEventListener("click", function (e) {
+    var btn = e.target.closest(".work__card");
     if (btn) location.hash = "work/" + S.projects[+btn.dataset.i].slug;
   });
   $("#project-close").addEventListener("click", function () {
@@ -159,6 +147,7 @@
   });
   document.addEventListener("keydown", function (e) {
     if (e.key === "Escape" && !overlay.hidden) $("#project-close").click();
+    if (e.key === "Escape" && document.body.classList.contains("nav-open")) closeMenu();
   });
   window.addEventListener("hashchange", route);
   route();

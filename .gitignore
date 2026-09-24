@@ -1,2 +1,6 @@
 .DS_Store
 Thumbs.db
+
+# source assets (not needed for the built site)
+projects/
+*.pdf

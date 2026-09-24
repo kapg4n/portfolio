@@ -4,46 +4,45 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Portfolio</title>
-  <meta name="description" content="Independent graphic designer: brand identity, packaging and art direction.">
+  <meta name="description" content="Creative studio: brand identity, packaging and art direction.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:ital,wght@0,400;0,500;0,700;0,900;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400;0,500;0,600;0,700;1,400;1,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
   <a class="skip" href="#works">Skip to work</a>
 
-  <header class="top">
-    <a class="top__name" href="#top" data-bind="name"></a>
-    <nav class="top__nav" aria-label="Main">
-      <a href="#works">Work</a>
-      <a href="#services">Services</a>
+  <header class="site-header" id="site-header">
+    <a class="site-header__logo" href="#top" data-bind="name"></a>
+    <button class="menu-toggle" id="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+    <nav class="site-nav" id="site-nav" aria-label="Main">
+      <a href="#top">Home</a>
+      <a href="#works">Works</a>
       <a href="#about">About</a>
-      <a href="#contact">Contact</a>
     </nav>
   </header>
 
-  <main id="top">
-    <section class="hero" aria-label="Introduction">
-      <h1 class="hero__mark" id="wordmark" data-bind="name"></h1>
-      <div class="hero__meta">
-        <p data-bind="role"></p>
-        <p data-bind="location"></p>
-        <p class="hero__status"><span class="dot" aria-hidden="true"></span><span data-bind="availability"></span></p>
+  <main>
+    <section class="intro" id="top" aria-label="Recalibrated, creative studio">
+      <h1 class="intro__mark">CO:<br>Recalibrated<span class="intro__star">*</span></h1>
+      <div class="intro__def">
+        <p class="intro__ipa">*/riːkˈæl.ɪ.breɪt./</p>
+        <p class="intro__gloss">to change the way you do or think about something.</p>
       </div>
-      <p class="hero__intro" data-bind="intro"></p>
+      <p class="intro__tag">creative studio</p>
     </section>
 
     <section class="works" id="works" aria-labelledby="works-h">
-      <div class="section-head">
-        <h2 id="works-h">Selected work</h2>
-        <p class="section-head__count" id="works-count"></p>
+      <div class="works__head">
+        <h2 id="works-h">Selected Works</h2>
+        <a class="works__all" href="#works">See all works</a>
       </div>
-      <ul class="works__list" id="works-list"></ul>
+      <ul class="works__grid" id="works-list"></ul>
     </section>
 
     <section class="services" id="services" aria-labelledby="services-h">
-      <h2 id="services-h">Services</h2>
+      <h2 id="services-h" class="services__label">Services</h2>
       <dl class="services__list" id="services-list"></dl>
     </section>
 
@@ -56,20 +55,17 @@
         <p class="about__clients" id="clients"></p>
       </div>
     </section>
-
-    <section class="contact" id="contact" aria-labelledby="contact-h">
-      <h2 id="contact-h">Have a project in mind?</h2>
-      <a class="contact__mail" id="mail"></a>
-      <p class="contact__links" id="socials"></p>
-    </section>
   </main>
 
-  <footer class="foot">
-    <p>&copy; <span id="year"></span> <span data-bind="name"></span></p>
-    <a href="#top">Back to top</a>
+  <footer class="site-footer" id="contact">
+    <h2 class="site-footer__title">Get in touch</h2>
+    <a class="site-footer__mail" id="mail"></a>
+    <p class="site-footer__socials" id="socials"></p>
+    <div class="site-footer__meta">
+      <p>&copy; <span id="year"></span> <span data-bind="name"></span></p>
+      <a href="#top">Back to top</a>
+    </div>
   </footer>
-
-  <div class="peek" id="peek" aria-hidden="true"></div>
 
   <div class="project" id="project" role="dialog" aria-modal="true" aria-labelledby="project-title" hidden>
     <div class="project__inner">
