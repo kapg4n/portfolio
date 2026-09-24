@@ -80,6 +80,29 @@
     nav.addEventListener("click", function (e) { if (e.target.closest("a")) closeMenu(); });
   }
 
+  /* ---------- "recalibrating" letter scramble on the wordmark ---------- */
+  (function () {
+    var word = $("#intro-word");
+    if (!word) return;
+    if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    var final = word.getAttribute("data-final") || word.textContent;
+    var glyphs = "ABCDEFGHIJKLMNOPQRSTUVWXYZ#%*+=/<>";
+    var lockAt = [];
+    for (var i = 0; i < final.length; i++) lockAt[i] = 10 + i * 3;
+    var last = lockAt[final.length - 1];
+    var frame = 0;
+    function tick() {
+      var out = "";
+      for (var j = 0; j < final.length; j++) {
+        if (final[j] === " ") { out += " "; continue; }
+        out += frame >= lockAt[j] ? final[j] : glyphs[(Math.random() * glyphs.length) | 0];
+      }
+      word.textContent = out;
+      if (frame++ < last) requestAnimationFrame(tick); else word.textContent = final;
+    }
+    setTimeout(function () { requestAnimationFrame(tick); }, 260);
+  })();
+
   /* ---------- header goes solid once the page slides over the cover ---------- */
   var header = $("#site-header");
   var page = $("#page");

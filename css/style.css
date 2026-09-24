@@ -81,8 +81,56 @@ ul { list-style: none; }
   height: 100svh;
   display: flex; flex-direction: column;
   padding: clamp(88px, 14vh, 148px) var(--pad) clamp(24px, 4vh, 48px);
-  background: var(--flame);
   color: var(--ink);
+  background-color: var(--flame);
+  background-image:
+    repeating-linear-gradient(90deg, rgba(17,17,17,0.07) 0 1px, transparent 1px 25%),
+    repeating-linear-gradient(0deg, rgba(17,17,17,0.07) 0 1px, transparent 1px 33.333%);
+  overflow: hidden;
+}
+/* soft glow that drifts behind the wordmark */
+.intro::before {
+  content: "";
+  position: absolute; z-index: -1;
+  width: 60vmax; height: 60vmax; left: -12vmax; top: -14vmax;
+  background: radial-gradient(closest-side, rgba(255,255,255,0.35), transparent 70%);
+  filter: blur(6px);
+  animation: introGlow 14s ease-in-out infinite alternate;
+}
+@keyframes introGlow {
+  from { transform: translate(0, 0) scale(1); }
+  to   { transform: translate(22vw, 16vh) scale(1.25); }
+}
+.intro > * { animation: introRise 0.9s cubic-bezier(.2,.7,.2,1) both; }
+.intro__mark { animation-delay: 0.05s; }
+.intro__def { animation-delay: 0.35s; }
+.intro__bottom { animation-delay: 0.6s; }
+@keyframes introRise { from { opacity: 0; transform: translateY(26px); } to { opacity: 1; transform: none; } }
+.intro__co { display: inline-block; }
+.intro__word { display: inline-block; }
+.intro__star {
+  display: inline-block;
+  transform-origin: center;
+  animation: introStar 2.8s ease-in-out infinite;
+}
+@keyframes introStar { 0%, 100% { transform: rotate(0) scale(1); } 50% { transform: rotate(90deg) scale(1.18); } }
+.intro__bottom {
+  margin-top: auto;
+  display: flex; justify-content: space-between; align-items: flex-end; gap: 16px;
+}
+.intro__scroll {
+  display: inline-flex; flex-direction: column; align-items: center; gap: 10px;
+  text-decoration: none; text-transform: uppercase;
+  font-size: var(--step--1); letter-spacing: 0.14em;
+}
+.intro__scroll::after {
+  content: ""; width: 1px; height: 40px; background: currentColor;
+  transform-origin: top; animation: introScroll 1.8s ease-in-out infinite;
+}
+@keyframes introScroll {
+  0% { transform: scaleY(0); opacity: 0; }
+  40% { transform: scaleY(1); opacity: 1; }
+  100% { transform: scaleY(1) translateY(40px); opacity: 0; }
 }
 /* the rest of the site slides up over the fixed cover */
 .page {
@@ -106,9 +154,6 @@ ul { list-style: none; }
 .intro__ipa { font-size: var(--step-1); }
 .intro__gloss { font-size: var(--step-1); color: rgba(17, 17, 17, 0.62); }
 .intro__tag {
-  margin-top: auto;
-  align-self: flex-end;
-  padding-top: clamp(24px, 4vh, 48px);
   font-size: var(--step-2);
   font-weight: 700;
   letter-spacing: -0.01em;
