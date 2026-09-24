@@ -118,8 +118,10 @@
 
   /* ---------- services ---------- */
   $("#services-list").innerHTML = S.services.map(function (s) {
+    var items = (s.items && s.items.length)
+      ? '<p class="service__items">' + s.items.map(esc).join(" · ") + '</p>' : "";
     return '<div class="service"><dt class="service__title">' + esc(s.title) + '</dt>' +
-      (s.text ? '<dd class="service__text">' + esc(s.text) + '</dd>' : '<dd></dd>') +
+      '<dd class="service__text">' + (s.text ? esc(s.text) : "") + items + '</dd>' +
       '</div>';
   }).join("");
 

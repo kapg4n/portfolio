@@ -46,14 +46,10 @@ window.SITE = {
   portrait: "images/asics-run.jpeg",
 
   services: [
-    { title: "Creative direction", text: "The big idea and the through-line that keeps every touchpoint speaking with one voice." },
-    { title: "Art direction", text: "Shoots, campaigns and launch material that stay true to the brand." },
-    { title: "Branding", text: "Logos, type and colour systems, and the guidelines that keep them consistent." },
-    { title: "Packaging design", text: "Labels, boxes and bags, from first sketch to print-ready files and press checks." },
-    { title: "Illustration", text: "Custom drawings for packaging, walls and social media." },
-    { title: "Photography", text: "Product and lifestyle photography, art-directed and styled in-house." },
-    { title: "Website design", text: "We develop powerful platforms that grow with your needs." },
-    { title: "Social media design", text: "Templates and content systems the team can run in five minutes a week." }
+    { title: "Brand", text: "Logos, type and colour systems, and the through-line that keeps every touchpoint speaking with one voice.", items: ["Creative direction", "Branding"] },
+    { title: "Packaging", text: "Labels, boxes and bags, with the odd custom drawing, taken from first sketch to print-ready files and a press check.", items: ["Packaging design", "Illustration"] },
+    { title: "Art direction & Photography", text: "Shoots, campaigns and launch material, art-directed and styled in-house so it all stays true to the brand.", items: ["Art direction", "Photography"] },
+    { title: "Digital", text: "Websites, templates and content systems the team can keep up with in a few minutes a week.", items: ["Website design", "Social media design"] }
   ],
 
   projects: [
