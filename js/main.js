@@ -80,16 +80,17 @@
     nav.addEventListener("click", function (e) { if (e.target.closest("a")) closeMenu(); });
   }
 
-  /* ---------- header goes solid once past the orange cover ---------- */
+  /* ---------- header goes solid once the page slides over the cover ---------- */
   var header = $("#site-header");
-  var intro = $("#top");
-  if (header && intro && "IntersectionObserver" in window) {
-    new IntersectionObserver(function (entries) {
-      header.classList.toggle("is-solid", !entries[0].isIntersecting);
-    }, { rootMargin: "-70px 0px 0px 0px" }).observe(intro);
-  } else if (header) {
-    header.classList.add("is-solid");
+  var page = $("#page");
+  function syncHeader() {
+    if (!header) return;
+    var trigger = (page ? page.offsetTop : window.innerHeight) - header.offsetHeight;
+    header.classList.toggle("is-solid", window.scrollY >= trigger - 1);
   }
+  window.addEventListener("scroll", syncHeader, { passive: true });
+  window.addEventListener("resize", syncHeader);
+  syncHeader();
 
   /* ---------- project overlay, routed by #work/slug ---------- */
   var overlay = $("#project");

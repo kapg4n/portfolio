@@ -44,13 +44,13 @@ ul { list-style: none; }
 ::selection { background: var(--night); color: var(--flame); }
 .skip {
   position: absolute; left: var(--pad); top: -100px;
-  background: var(--ink); color: var(--paper); padding: 8px 12px; z-index: 60;
+  background: var(--ink); color: var(--paper); padding: 8px 12px; z-index: 70;
 }
 .skip:focus { top: calc(env(safe-area-inset-top, 0px) + 8px); }
 
 /* ---------- header ---------- */
 .site-header {
-  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20;
+  position: fixed; top: env(safe-area-inset-top, 0px); left: 0; right: 0; z-index: 50;
   display: flex; justify-content: space-between; align-items: center; gap: 16px;
   padding: 16px var(--pad);
   background: transparent;
@@ -77,11 +77,18 @@ ul { list-style: none; }
 
 /* ---------- intro cover (orange, PDF first slide) ---------- */
 .intro {
-  min-height: clamp(380px, 62svh, 660px);
+  position: fixed; inset: 0; z-index: 1;
+  height: 100svh;
   display: flex; flex-direction: column;
-  padding: clamp(76px, 12vh, 128px) var(--pad) clamp(24px, 4vh, 48px);
+  padding: clamp(88px, 14vh, 148px) var(--pad) clamp(24px, 4vh, 48px);
   background: var(--flame);
   color: var(--ink);
+}
+/* the rest of the site slides up over the fixed cover */
+.page {
+  position: relative; z-index: 2;
+  margin-top: 100svh;
+  background: var(--paper);
 }
 .intro__mark {
   font-weight: 700;
@@ -234,7 +241,7 @@ h2 { font-weight: 700; letter-spacing: -0.02em; }
 
 /* ---------- project overlay ---------- */
 .project {
-  position: fixed; inset: 0; z-index: 40;
+  position: fixed; inset: 0; z-index: 60;
   background: var(--paper);
   overflow-y: auto;
   overscroll-behavior: contain;
