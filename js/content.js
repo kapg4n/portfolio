@@ -26,6 +26,11 @@ window.SITE = {
   availability: "Taking new projects from November",
   intro: "We recalibrate the way brands look and speak — identities, packaging and art direction for restaurants, shops and makers who want to look like themselves.",
 
+  // Featured project shown above the works grid. slug points to a project below.
+  // Set video (and an optional poster) to autoplay a muted loop; otherwise the
+  // project's images crossfade.
+  featured: { slug: "kanti", video: "", poster: "" },
+
   email: "hello@recalibrated.co",
   socials: [
     { label: "Instagram", url: "https://instagram.com/recalibrated" },
