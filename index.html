@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Portfolio</title>
+  <meta name="description" content="Independent graphic designer: brand identity, packaging and art direction.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:ital,wght@0,400;0,500;0,700;0,900;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip" href="#works">Skip to work</a>
+
+  <header class="top">
+    <a class="top__name" href="#top" data-bind="name"></a>
+    <nav class="top__nav" aria-label="Main">
+      <a href="#works">Work</a>
+      <a href="#services">Services</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero" aria-label="Introduction">
+      <h1 class="hero__mark" id="wordmark" data-bind="name"></h1>
+      <div class="hero__meta">
+        <p data-bind="role"></p>
+        <p data-bind="location"></p>
+        <p class="hero__status"><span class="dot" aria-hidden="true"></span><span data-bind="availability"></span></p>
+      </div>
+      <p class="hero__intro" data-bind="intro"></p>
+    </section>
+
+    <section class="works" id="works" aria-labelledby="works-h">
+      <div class="section-head">
+        <h2 id="works-h">Selected work</h2>
+        <p class="section-head__count" id="works-count"></p>
+      </div>
+      <ul class="works__list" id="works-list"></ul>
+    </section>
+
+    <section class="services" id="services" aria-labelledby="services-h">
+      <h2 id="services-h">Services</h2>
+      <dl class="services__list" id="services-list"></dl>
+    </section>
+
+    <section class="about" id="about" aria-labelledby="about-h">
+      <div class="about__portrait" id="portrait" role="img"></div>
+      <div class="about__text">
+        <h2 id="about-h">About</h2>
+        <div id="about-body"></div>
+        <p class="about__clients-label">Selected clients</p>
+        <p class="about__clients" id="clients"></p>
+      </div>
+    </section>
+
+    <section class="contact" id="contact" aria-labelledby="contact-h">
+      <h2 id="contact-h">Have a project in mind?</h2>
+      <a class="contact__mail" id="mail"></a>
+      <p class="contact__links" id="socials"></p>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <p>&copy; <span id="year"></span> <span data-bind="name"></span></p>
+    <a href="#top">Back to top</a>
+  </footer>
+
+  <div class="peek" id="peek" aria-hidden="true"></div>
+
+  <div class="project" id="project" role="dialog" aria-modal="true" aria-labelledby="project-title" hidden>
+    <div class="project__inner">
+      <button class="project__close" id="project-close" type="button">Close</button>
+      <header class="project__head">
+        <h2 class="project__title" id="project-title"></h2>
+        <dl class="project__facts" id="project-facts"></dl>
+      </header>
+      <p class="project__summary" id="project-summary"></p>
+      <div class="project__gallery" id="project-gallery"></div>
+      <nav class="project__next" id="project-next" aria-label="Next project"></nav>
+    </div>
+  </div>
+
+  <script src="js/content.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
