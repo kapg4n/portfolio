@@ -107,19 +107,6 @@ ul { list-style: none; }
     repeating-linear-gradient(0deg, rgba(243,91,4,0.16) 0 1px, transparent 1px 33.333%);
   overflow: hidden;
 }
-/* soft glow that drifts behind the wordmark */
-.intro::before {
-  content: "";
-  position: absolute; z-index: -1;
-  width: 60vmax; height: 60vmax; left: -12vmax; top: -14vmax;
-  background: radial-gradient(closest-side, rgba(255,255,255,0.35), transparent 70%);
-  filter: blur(6px);
-  animation: introGlow 14s ease-in-out infinite alternate;
-}
-@keyframes introGlow {
-  from { transform: translate(0, 0) scale(1); }
-  to   { transform: translate(22vw, 16vh) scale(1.25); }
-}
 .intro > * { animation: introRise 0.9s cubic-bezier(.2,.7,.2,1) both; }
 .intro__mark { animation-delay: 0.05s; }
 .intro__def { animation-delay: 0.35s; }
