@@ -29,7 +29,7 @@ window.SITE = {
   // Featured project shown above the works grid. slug points to a project below.
   // Set video (and an optional poster) to autoplay a muted loop; otherwise the
   // project's images crossfade.
-  featured: { slug: "kanti", video: "", poster: "" },
+  featured: { slug: "atlas-studio", video: "", poster: "" },
 
   email: "hello@recalibrated.co",
   socials: [
@@ -42,7 +42,7 @@ window.SITE = {
     "Recalibrated is a small creative studio working across identity, packaging and art direction. We started in a packaging workshop, learning how a label survives a supermarket shelf and how a menu survives a Friday-night service. Since then we have worked with cafés, bakeries, makers and a few stubborn founders who knew exactly what they did not want.",
     "Most projects begin with a long conversation and a lot of sketching on paper. We work as a tight team, bringing in a trusted photographer or developer when a project needs one, and we stay involved through to the press check."
   ],
-  clients: ["Kantİ", "Yonca Eczanesi", "NOX Smokehouse", "Cabana", "Living & Wellbeing", "Dimanche Atelier", "Whisk", "Myrina"],
+  clients: ["Atlas Studio", "Meridian", "Ember House", "Verano", "Lumen", "Otto Atelier", "Field Day", "Harbor Goods"],
   portrait: "images/asics-run.jpeg",
 
   services: [
@@ -54,8 +54,8 @@ window.SITE = {
 
   projects: [
     {
-      slug: "kanti",
-      title: "Kantİ",
+      slug: "atlas-studio",
+      title: "Atlas Studio",
       type: "Dining · Identity",
       year: "2026",
       location: "Karaköy, Istanbul",
@@ -64,8 +64,8 @@ window.SITE = {
       images: shots(0)
     },
     {
-      slug: "yonca-eczanesi",
-      title: "Yonca Eczanesi",
+      slug: "meridian",
+      title: "Meridian",
       type: "Pharmacy · Packaging",
       year: "2025",
       location: "Moda, Istanbul",
@@ -74,8 +74,8 @@ window.SITE = {
       images: shots(1)
     },
     {
-      slug: "nox-smokehouse",
-      title: "NOX Smokehouse",
+      slug: "ember-house",
+      title: "Ember House",
       type: "Branding",
       year: "2025",
       location: "Bebek, Istanbul",
@@ -84,8 +84,8 @@ window.SITE = {
       images: shots(2)
     },
     {
-      slug: "cabana",
-      title: "Cabana",
+      slug: "verano",
+      title: "Verano",
       type: "Art direction",
       year: "2024",
       location: "Çeşme",
@@ -94,8 +94,8 @@ window.SITE = {
       images: shots(3)
     },
     {
-      slug: "living-wellbeing",
-      title: "Living & Wellbeing",
+      slug: "lumen",
+      title: "Lumen",
       type: "Café · Identity",
       year: "2024",
       location: "Nişantaşı, Istanbul",
@@ -104,8 +104,8 @@ window.SITE = {
       images: shots(4)
     },
     {
-      slug: "dimanche-atelier",
-      title: "Dimanche Atelier",
+      slug: "otto-atelier",
+      title: "Otto Atelier",
       type: "Furniture design",
       year: "2023",
       location: "Bomonti, Istanbul",
@@ -114,8 +114,8 @@ window.SITE = {
       images: shots(5)
     },
     {
-      slug: "whisk",
-      title: "Whisk",
+      slug: "field-day",
+      title: "Field Day",
       type: "Branding · Packaging",
       year: "2023",
       location: "Kadıköy, Istanbul",
@@ -124,8 +124,8 @@ window.SITE = {
       images: shots(6)
     },
     {
-      slug: "myrina",
-      title: "Myrina",
+      slug: "harbor-goods",
+      title: "Harbor Goods",
       type: "Label design",
       year: "2022",
       location: "Urla",
