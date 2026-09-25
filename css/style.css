@@ -11,7 +11,7 @@
   --flame: #F35B04;
   --font: "Arimo", "Helvetica Neue", Helvetica, Arial, sans-serif;
   --font-display: "Familjen Grotesk", "Arimo", "Helvetica Neue", Arial, sans-serif;
-  --font-hero: "Anton", "Familjen Grotesk", "Arial Narrow", "Helvetica Neue", sans-serif;
+  --font-hero: "Oswald", "Familjen Grotesk", "Arial Narrow", "Helvetica Neue", sans-serif;
   --pad: clamp(16px, 3.2vw, 44px);
   --step--1: 0.875rem;
   --step-0: 1rem;
@@ -159,9 +159,9 @@ ul { list-style: none; }
 }
 .intro__mark {
   font-family: var(--font-hero);
-  font-weight: 400; /* Anton ships a single heavy weight */
-  line-height: 0.9;
-  letter-spacing: 0.005em;
+  font-weight: 400; /* Oswald regular — lighter than the old heavy face */
+  line-height: 0.92;
+  letter-spacing: 0.01em;
   text-transform: uppercase;
   font-size: clamp(2.75rem, 12vw, 9.5rem);
   margin-left: -0.01em;
