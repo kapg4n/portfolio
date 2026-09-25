@@ -56,7 +56,7 @@ ul { list-style: none; }
   display: flex; justify-content: space-between; align-items: center; gap: 16px;
   padding: 16px var(--pad);
   background: transparent;
-  color: var(--ink);
+  color: var(--flame);
   transition: background 0.3s, color 0.3s;
 }
 .site-header.is-solid { background: var(--night); color: var(--flame); }
@@ -79,9 +79,9 @@ ul { list-style: none; }
   font-size: var(--step--1); letter-spacing: 0.06em;
   transition: background 0.2s, color 0.2s, opacity 0.2s;
 }
-/* transparent header (over the orange cover): fill ink, text flame */
+/* transparent header (over the black cover): fill flame, text night */
 .site-header__cta:hover,
-.site-header__cta:focus-visible { background: var(--ink); color: var(--flame); }
+.site-header__cta:focus-visible { background: var(--flame); color: var(--night); }
 /* solid header: fill flame, text night */
 .site-header.is-solid .site-header__cta:hover,
 .site-header.is-solid .site-header__cta:focus-visible { background: var(--flame); color: var(--night); }
@@ -100,11 +100,11 @@ ul { list-style: none; }
   height: 100svh;
   display: flex; flex-direction: column;
   padding: clamp(88px, 14vh, 148px) var(--pad) clamp(24px, 4vh, 48px);
-  color: var(--ink);
-  background-color: var(--flame);
+  color: var(--flame);
+  background-color: var(--night);
   background-image:
-    repeating-linear-gradient(90deg, rgba(17,17,17,0.07) 0 1px, transparent 1px 25%),
-    repeating-linear-gradient(0deg, rgba(17,17,17,0.07) 0 1px, transparent 1px 33.333%);
+    repeating-linear-gradient(90deg, rgba(243,91,4,0.16) 0 1px, transparent 1px 25%),
+    repeating-linear-gradient(0deg, rgba(243,91,4,0.16) 0 1px, transparent 1px 33.333%);
   overflow: hidden;
 }
 /* soft glow that drifts behind the wordmark */
@@ -175,7 +175,7 @@ ul { list-style: none; }
   max-width: 44ch;
 }
 .intro__ipa { font-size: var(--step-1); }
-.intro__gloss { font-size: var(--step-1); color: rgba(17, 17, 17, 0.62); }
+.intro__gloss { font-size: var(--step-1); color: rgba(243, 91, 4, 0.72); }
 .intro__tag {
   font-family: var(--font-hero);
   font-size: var(--step-2);
