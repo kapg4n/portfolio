@@ -167,7 +167,9 @@
     if (!word) return;
     if (reduce) return;
     var final = word.getAttribute("data-final") || word.textContent;
-    var glyphs = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    // narrow-to-medium glyphs only (no W/M/O/Q etc.) so a scrambled frame is
+    // never wider than the resolved word — keeps the star from wrapping
+    var glyphs = "EFHIJKLNPRSTVXYZ";
     var HOLD = 4200; // pause on the resolved word before scrambling again
     var STEP = 45;   // ms between scramble frames (higher = slower)
 

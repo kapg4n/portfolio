@@ -152,6 +152,7 @@ ul { list-style: none; }
   text-transform: uppercase;
   font-size: clamp(2.75rem, 12vw, 9.5rem);
   margin-left: -0.01em;
+  white-space: nowrap; /* keep the word + star on one line during the scramble */
 }
 .intro__word { min-width: 0; } /* JS locks a width so the loop doesn't shift the layout */
 /* keep the asterisk in the plain grotesque, not the display face */
